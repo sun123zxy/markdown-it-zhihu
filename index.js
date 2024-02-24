@@ -1,6 +1,8 @@
 /*jslint node: true */
 'use strict';
 
+const replaceNl = require('./md-html-util').replaceNl;
+
 const escapeHtml = require('./md-html-util').escapeHtml
 
 const unescapeMd = require('./md-html-util').unescapeMd;
@@ -153,11 +155,11 @@ module.exports = function math_plugin(md, options) {
     options = options || {};
 
     var inlineRenderer = function(tokens, idx){
-        return '<img eeimg="1" src="//www.zhihu.com/equation?tex=' + encodeURIComponent(tokens[idx].content) + '" alt="' + escapeHtml(tokens[idx].content).trim() + '"/>'
+        return '<img eeimg="1" src="//www.zhihu.com/equation?tex=' + encodeURIComponent(tokens[idx].content) + '" alt="' + escapeHtml(replaceNl(tokens[idx].content)).trim() + '"/>'
     };
 
     var blockRenderer = function(tokens, idx){
-        return '<p><img eeimg="1" src="//www.zhihu.com/equation?tex=' + encodeURIComponent(tokens[idx].content) + '" alt="' + escapeHtml(tokens[idx].content).trim() + '"/></p>'
+        return '<p><img eeimg="1" src="//www.zhihu.com/equation?tex=' + encodeURIComponent(tokens[idx].content) + '" alt="' + escapeHtml(replaceNl(tokens[idx].content)).trim() + '"/></p>'
     }
 
     var imageRenderer = function(tokens, idx) {

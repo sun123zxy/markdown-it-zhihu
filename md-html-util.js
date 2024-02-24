@@ -13,6 +13,10 @@ function replaceUnsafeChar(ch) {
 	return HTML_REPLACEMENTS[ch];
 }
 
+function replaceNl(str) {
+	return str.replace(/[\n]/g," ");
+}
+
 function escapeHtml(str) {
 	if (HTML_ESCAPE_TEST_RE.test(str)) {
 		return str.replace(HTML_ESCAPE_REPLACE_RE, replaceUnsafeChar);
@@ -49,7 +53,7 @@ function beautifyDate(date) {
 }
 
 
-
+exports.replaceNl = replaceNl;
 exports.escapeHtml =  escapeHtml;
 exports.unescapeMd = unescapeMd;
 exports.removeHtmlTag = removeHtmlTag;
